@@ -119,7 +119,6 @@ class MyHandler(blivedm.BaseHandler):
     def _on_danmaku(self, client: blivedm.BLiveClient, message: web_models.DanmakuMessage):
         print(f'[{client.room_id}] {message.uname}: {message.msg}')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': message.msg,
         })
@@ -128,7 +127,6 @@ class MyHandler(blivedm.BaseHandler):
         print(f'[{client.room_id}] {message.uname} 赠送{message.gift_name}x{message.num}'
               f' ({message.coin_type}瓜子x{message.total_coin})')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': f'赠送{message.gift_name}x{message.num} ({message.coin_type}瓜子x{message.total_coin})'
         })
@@ -136,7 +134,6 @@ class MyHandler(blivedm.BaseHandler):
     def _on_buy_guard(self, client: blivedm.BLiveClient, message: web_models.GuardBuyMessage):
         print(f'[{client.room_id}] {message.username} 购买{message.gift_name}')
         send_danmaku({
-            'uid': message.uid,
             'username': message.username,
             'content': f'赠送{message.gift_name}x{message.num} ({message.coin_type}瓜子x{message.total_coin})'
         })
@@ -144,7 +141,6 @@ class MyHandler(blivedm.BaseHandler):
     def _on_super_chat(self, client: blivedm.BLiveClient, message: web_models.SuperChatMessage):
         print(f'[{client.room_id}] 醒目留言 ¥{message.price} {message.uname}: {message.message}')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': f'醒目留言 ¥{message.price}: {message.message}'
         })
@@ -152,7 +148,6 @@ class MyHandler(blivedm.BaseHandler):
     def _on_open_live_danmaku(self, client: blivedm.OpenLiveClient, message: open_models.DanmakuMessage):
         print(f'[{message.room_id}] {message.uname}: {message.msg}')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': message.msg
         })
@@ -163,7 +158,6 @@ class MyHandler(blivedm.BaseHandler):
         print(f'[{message.room_id}] {message.uname} 赠送{message.gift_name}x{message.gift_num}'
               f' ({coin_type}x{total_coin})')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': f'赠送{message.gift_name}x{message.gift_num} ({coin_type}x{total_coin})'
         })
@@ -171,7 +165,6 @@ class MyHandler(blivedm.BaseHandler):
     def _on_open_live_buy_guard(self, client: blivedm.OpenLiveClient, message: open_models.GuardBuyMessage):
         print(f'[{message.room_id}] {message.user_info.uname} 购买 大航海等级={message.guard_level}')
         send_danmaku({
-            'uid': message.user_info.uid,
             'username': message.user_info.uname,
             'content': f'购买 大航海等级={message.guard_level}'
         })
@@ -181,7 +174,6 @@ class MyHandler(blivedm.BaseHandler):
     ):
         print(f'[{message.room_id}] 醒目留言 ¥{message.rmb} {message.uname}: {message.message}')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': f'醒目留言 ¥{message.rmb}: {message.message}'
         })
@@ -194,7 +186,6 @@ class MyHandler(blivedm.BaseHandler):
     def _on_open_live_like(self, client: blivedm.OpenLiveClient, message: open_models.LikeMessage):
         print(f'[{message.room_id}] {message.uname} 点赞')
         send_danmaku({
-            'uid': message.uid,
             'username': message.uname,
             'content': f'点赞'
         })
