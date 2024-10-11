@@ -17,7 +17,7 @@ logged_unknown_cmds = {
     'ENTRY_EFFECT',
     'HOT_RANK_CHANGED',
     'HOT_RANK_CHANGED_V2',
-    'INTERACT_WORD',
+    # 'INTERACT_WORD',
     'LIVE',
     'LIVE_INTERACTIVE_GAME',
     'NOTICE_MSG',
@@ -78,6 +78,8 @@ class BaseHandler(HandlerInterface):
     ] = {
         # 收到心跳包，这是blivedm自造的消息，原本的心跳包格式不一样
         '_HEARTBEAT': _make_msg_callback('_on_heartbeat', web_models.HeartbeatMessage),
+        # 进入直播间
+        'INTERACT_WORD': _make_msg_callback('_on_enter', web_models.UserInData),
         # 收到弹幕
         # go-common\app\service\live\live-dm\service\v1\send.go
         'DANMU_MSG': __danmu_msg_callback,
@@ -131,6 +133,11 @@ class BaseHandler(HandlerInterface):
     def _on_heartbeat(self, client: ws_base.WebSocketClientBase, message: web_models.HeartbeatMessage):
         """
         收到心跳包
+        """
+    
+    def _on_enter(self, client: ws_base.WebSocketClientBase, data: web_models.UserInData):
+        """
+        用户进入直播间
         """
 
     def _on_danmaku(self, client: ws_base.WebSocketClientBase, message: web_models.DanmakuMessage):

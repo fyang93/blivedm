@@ -29,6 +29,26 @@ class HeartbeatMessage:
         )
 
 
+# 用户进入直播间
+@dataclasses.dataclass
+class UserInData:
+    uname: str = ''
+    uname_color: str = ''
+    dmscore: int = 0
+    medal_level: int = 0
+
+    @classmethod
+    def from_command(cls, data: dict):
+        fans_medal = data.get('fans_medal')
+        medal_level = 0 if fans_medal is None else fans_medal.get('medal_level', 0)
+        return cls(
+            uname=data.get('uname', ''),  # 设置默认值，这里假设默认值为''
+            uname_color=data.get('uname_color', ''),
+            dmscore=data.get('dmscore', 0),
+            medal_level=medal_level,
+        )
+
+
 @dataclasses.dataclass
 class DanmakuMessage:
     """
