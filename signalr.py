@@ -114,7 +114,10 @@ class MyHandler(blivedm.BaseHandler):
 
     def _on_enter(self, client: blivedm.BLiveClient, data: web_models.UserInData):
         print(f' {data.uname} 进入了直播间')
-        send_danmaku(f'{data.uname} 进入了直播间')
+        send_danmaku({
+            'username': data.uname,
+            'content': '进入了直播间',
+        })
 
     def _on_danmaku(self, client: blivedm.BLiveClient, message: web_models.DanmakuMessage):
         print(f'[{client.room_id}] {message.uname}: {message.msg}')
